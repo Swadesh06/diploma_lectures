@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .reveal {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 24px;
+            color: #333;
+        }
+        .reveal .slides {
+            text-align: left;
+        }
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Roboto Slab', serif;
+            text-transform: none;
+            color: #2c3e50;
+        }
+        .reveal h1 { font-size: 2.5em; }
+        .reveal h2 { font-size: 1.8em; margin-bottom: 0.5em; }
+        .reveal h3 { font-size: 1.3em; }
+        .reveal ul {
+            line-height: 1.5;
+            margin-bottom: 1em;
+        }
+        .reveal li {
+            margin-bottom: 0.5em;
+        }
+        .slide-image {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
+            height: auto;
+            max-height: 400px; /* Ensures uniform height */
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .reveal .slides section {
+            padding: 20px 40px;
+        }
+        .reveal .progress { color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Understanding Transformers: From Basics to Attention</h1>
+                <h3>A Journey Through ANNs, RNNs, LSTMs, and Transformers</h3>
+                <p>Swadesh Swain</p>
+                <p>Date: June 25, 2024</p>
+            </section>
+
+            <section>
+                <h2>Introduction</h2>
+                <ul>
+                    <li>Brief overview of the session: We'll explore the evolution of neural network architectures, from basic ANNs to sophisticated Transformers.</li>
+                    <li>Importance of neural networks in modern AI: These architectures form the backbone of many cutting-edge AI applications, from natural language processing to computer vision.</li>
+                    <li>Flow: ANNs → RNNs → LSTMs → Transformers. This progression represents the increasing complexity and capability of neural network models.</li>
+                </ul>
+        
+            </section>
+
+            <section>
+                <h2>Artificial Neural Networks (ANNs)</h2>
+                <ul>
+                    <li>Definition and purpose: ANNs are computational models inspired by biological neural networks, designed to recognize patterns and solve complex problems.</li>
+                    <li>Basic structure: Composed of neurons (nodes) organized in layers - input layer, hidden layer(s), and output layer.</li>
+                    <li>Activation functions: Mathematical operations (e.g., ReLU, Sigmoid, Tanh) that introduce non-linearity, allowing ANNs to learn complex patterns.</li>
+                    <li>Simple feedforward mechanism: Information flows from input to output without loops, suitable for many tasks but limited in handling sequential data.</li>
+                </ul>
+                <img src="./ann_image.jpg" alt="ANN Structure" class="slide-image">
+            </section>
+
+            <section>
+                <h2>ANN Example</h2>
+                <ul>
+                    <li>Visual representation: A diagram showing input nodes, hidden layers, and output nodes with weighted connections.</li>
+                    <li>Forward propagation: Explanation of how input data moves through the network, with each node computing a weighted sum of inputs and applying an activation function.</li>
+                    <li>Loss calculation: Discussion on how the network's output is compared to the desired output to compute an error or loss.</li>
+                    <li>Backpropagation: Brief mention of how the network learns by adjusting weights based on the calculated error, propagating it backwards through the network.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Recurrent Neural Networks (RNNs)</h2>
+                <ul>
+                    <li>Definition and purpose: RNNs are designed to work with sequential data by maintaining an internal state or "memory".</li>
+                    <li>Handling sequential data: Unlike ANNs, RNNs can process inputs of variable length and capture temporal dependencies.</li>
+                    <li>Structure: Includes recurrent connections that feed the network's previous state back into itself, allowing information to persist.</li>
+                    <li>Hidden state equation: Typically, h_t = tanh(W_h * h_(t-1) + W_x * x_t + b), where h_t is the current hidden state, x_t is the current input, and W and b are learned parameters.</li>
+                </ul>
+                <img src="./rnn.png" alt="RNN Structure" class="slide-image">
+            </section>
+
+            <section>
+                <h2>RNN Challenges</h2>
+                <ul>
+                    <li>Vanishing gradients: As the network processes long sequences, gradients can become extremely small, making it difficult for the network to learn long-term dependencies.</li>
+                    <li>Exploding gradients: Conversely, gradients can also become extremely large, causing unstable updates and preventing convergence.</li>
+                    <li>Limited long-term memory: Due to these gradient issues, standard RNNs struggle to capture and utilize information from many steps earlier in a sequence.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Long Short-Term Memory (LSTM) Networks</h2>
+                <ul>
+                    <li>Introduction: LSTMs are a type of RNN designed to mitigate the vanishing/exploding gradient problems and better capture long-term dependencies.</li>
+                    <li>Structure: Consists of a cell state and three gates - forget gate, input gate, and output gate.</li>
+                    <li>Cell state: Acts as a highway for information flow across many time steps with minimal degradation.</li>
+                    <li>Gates: Control the flow of information into, out of, and within the cell state.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>LSTM Mechanism</h2>
+                <ul>
+                    <li>Forget gate: Decides what information to discard from the cell state.</li>
+                    <li>Input gate: Determines what new information to store in the cell state.</li>
+                    <li>Output gate: Controls what information from the cell state is used to compute the output.</li>
+                    <li>Long-term dependencies: LSTMs can learn to retain relevant information for many time steps and discard irrelevant information.</li>
+                    <li>Benefits over RNNs: Better at capturing long-range dependencies and mitigating gradient problems.</li>
+                </ul>
+                <img src="./lstm.png" alt="LSTM Cell Structure" class="slide-image">
+            </section>
+
+            <section>
+                <h2>Introduction to Transformers</h2>
+                <ul>
+                    <li>Shift to parallel processing: Unlike sequential RNNs, Transformers process entire sequences in parallel, greatly speeding up computation.</li>
+                    <li>Impact in NLP and beyond: Transformers have revolutionized natural language processing and are increasingly applied in other domains like computer vision.</li>
+                    <li>Key concepts: Self-attention mechanism allows the model to weigh the importance of different parts of the input dynamically.</li>
+                    <li>Scalability: Transformer architecture can be scaled to very large models with billions of parameters, leading to state-of-the-art performance on many tasks.</li>
+                </ul>
+                <img src="./transformer.png" alt="Transformer Architecture" class="slide-image">
+            </section>
+
+            <section>
+                <h2>Transformer Architecture</h2>
+                <ul>
+                    <li>Word Embeddings: Converting words into numerical vectors to be processed which contain the meaning and position information of the word.</li>
+                    <li>Attention Mechanism: Allows the model to jointly attend to information from different representation subspaces, each word contributes some relevance attribution to the embedding of other words.</li>
+                    <li>Feedforward networks: Each encoder and decoder layer includes a fully connected feedforward network for additional processing.</li>
+                </ul>
+                <img src="transformer.png" alt="Transformer Architecture" class="slide-image">
+            </section>
+
+            <section>
+                <h2>Positional Encoding</h2>
+                <ul>
+                    <li>Feedforward networks: Each encoder and decoder layer includes a fully connected feedforward network, typically with ReLU activation, adding non-linearity to the model.</li>
+                    <li>Purpose: These networks process the attention output, allowing for more complex transformations.</li>
+                    <li>Positional encoding: Since Transformers don't have an inherent notion of sequence order, positional encodings are added to the input embeddings.</li>
+                    <li>Implementation: Often uses sine and cosine functions of different frequencies to encode position information.</li>
+                </ul>
+                <img src="positional_encoding.png" alt="Positional Encoding Visualization" class="slide-image">
+            </section>
+
+            <section>
+                <h2>Attention Mechanism</h2>
+                <ol>
+                    <li>We generate Query values with a set of weights for our target word.</li>
+                    <li>We then generate Key values with an additional set of weights</li>
+                    <li>Now we do the dot product of the Query vector of the target word with the key vector of all the other words</li>
+                    <li>Then we pass it through a Softmax function to calulate percentage contribution</li>
+                    <li>Now we generate "Values" from each word using yet another set of weights</li>
+                    <li>We then scale the values by their corresponding SoftMax outputs and add all those vectors up to form the self-attention embedding of our target word. This denotes the rough contribution each word has to the target word, hence incorporating each word's relevance.</li>
+                </ol>
+                <img src="1688071657551.jpeg" alt="Attention Visualization" class="slide-image">
+            </section>
+
+
+            <section>
+                <h2>Training Transformers</h2>
+                <ul>
+                    <li>Loss function: Often cross-entropy for classification tasks or language modeling.</li>
+                    <li>Optimization: Typically uses Adam optimizer or variants, often with learning rate warmup and decay.</li>
+                    <li>Regularization: Techniques like dropout and layer normalization are crucial for training large Transformer models.</li>
+                    <li>Data and compute requirements: Training large Transformer models often requires vast amounts of data and significant computational resources.</li>
+                    <li>This scale of training is only possible because Transformers and very parallelizable.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Additional stuff done to make Transformers even more powerful</h2>
+                <ul>
+                    <li>Multi headed attention : Using multiple attention heads to use different sets of weights to generate multiple (QKV) sets fpr each word in order to capture various different types of relationships</li>
+                    <li>Normalization: To keep values getting too large or too low with respect to each other</li>
+                    <li>Additonal Feed forward Networks: To capture more complex data </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Applications of Transformers</h2>
+                <ul>
+                    <li>Natural Language Processing: Models like BERT, GPT, and T5 have set new state-of-the-art benchmarks in tasks like translation, summarization, and question answering.</li>
+                    <li>Computer Vision: Vision Transformers (ViT) have shown impressive performance on image classification and other vision tasks.</li>
+                    <li>Speech Processing: Transformers are being applied to speech recognition and synthesis with promising results.</li>
+                    <li>Future potential: Ongoing research into more efficient Transformer variants and applications in new domains like drug discovery and protein folding.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <ul>
+                    <li>Journey from ANNs to Transformers: We've seen how neural network architectures have evolved to handle increasingly complex tasks.</li>
+                    <li>Key innovations: Recurrent connections in RNNs, gating mechanisms in LSTMs, and self-attention in Transformers have each addressed limitations of previous models.</li>
+                    <li>Transformers' impact: The ability to process sequences in parallel and capture long-range dependencies has led to breakthroughs in various AI applications.</li>
+                    <li>Future directions: Research continues on making Transformers more efficient, interpretable, and applicable to new domains.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Q&A</h2>
+                <p>The floor is open for questions! You can seek answers on all the below (but not limited to) topics:</p>
+                <ul>
+                    <li>Clarifications on any concepts covered</li>
+                    <li>Comparisons between different architectures</li>
+                    <li>Potential applications and limitations of Transformers</li>
+                    <li>Future directions in neural network research</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>References and Further Reading</h2>
+                <ul>
+                    <li>Statquest videos for Transformers, RNNS, LSTMs, and Attention mechanism - Youtube </li>
+                    <li>3Blue1Brown videos, ANNs and Attention mechanism visualized - Youtube</li>
+                    <li>"Attention Is All You Need" by Vaswani et al. (2017) - The original Transformer paper, only approach this with a firm understanding of the above concepts!</li>
+                    <li>"Deep Learning" by Goodfellow, Bengio, and Courville - Comprehensive textbook on neural networks</li>
+                    <li>Stanford CS224N: Natural Language Processing with Deep Learning - Excellent course covering many of these topics</li>
+                    <li>Perlplexity is great tool to explore and search about these topics!</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Thank You</h2>
+                <p>Thank you for your attention!</p>
+                <p>For further questions or discussions: swadeshswain226@gmail.com</p>
+                <p>Here is the link to the Google Colab Tutorial: 
+                    <a href="https://colab.research.google.com/drive/1vQb0vHoBiqcUDaPgsdv_RwS8SvYtsoAw?usp=sharing" target="_blank">https://colab.research.google.com/drive/1vQb0vHoBiqcUDaPgsdv_RwS8SvYtsoAw?usp=sharing</a>
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        Reveal.initialize({
+            hash: true,
+            // Add more configuration options as needed
+        });
+    </script>
+</body>
+</html>

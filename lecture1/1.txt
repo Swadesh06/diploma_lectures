@@ -1,0 +1,17 @@
+                    <li>Statquest videos for Transformers, RNNS, LSTMs, and Attention mechanism, Youtube </li>
+                    <li>3Blue1Brown videos, ANNs and Attention mechanism visualized, Youtube</li>
+                    <li>"Attention Is All You Need" by Vaswani et al. (2017) - The original Transformer paper</li>
+                    <li>"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding" by Devlin et al. (2018)</li>
+                    <li>"Deep Learning" by Goodfellow, Bengio, and Courville - Comprehensive textbook on neural networks</li>
+                    <li>Stanford CS224N: Natural Language Processing with Deep Learning - Excellent course covering many of these topics</li>
+                    <li>Perlplexity is great tool to explore and search about these topics!</li>
+
+
+                <ul>
+                    <li>We generate Query values with a set of weights for our target word.</li>
+                    <li>We then generate Key values with an additional set of weights</li>
+                    <li>Now we do the dot product of the Query vector of the target word with the key vector of all the other words</li>
+                    <li>Then we pass it through a Softmax function to calulate percentage contribution</li>
+                    <li>Now we generate "Values" from each word using yet another set of weights</li>
+                    <li>We then scale the values by their corresponding SoftMax outputs and add all those vectors up to form the self-attention embedding of our target word. This denotes the rough contribution each word has to the target word, hence incorporating each word's relevance.</li>
+                </ul>
